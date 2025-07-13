@@ -17,10 +17,11 @@ using MediaBrowser.Model.Serialization;
 using Microsoft.Extensions.Caching.Memory;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using MediaBrowser.Common.Extensions;
 
 namespace Jellyfin.Plugin.OAuth;
 
-public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages, IPluginServiceRegistrator
+public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages, IServiceConfiguration
 {
     public override string Name => "OAuth Authentication";
 
@@ -104,7 +105,7 @@ public class Plugin : BasePlugin<PluginConfiguration>, IHasWebPages, IPluginServ
         }
     }
 
-    public void RegisterServices(IServiceCollection serviceCollection, IServerApplicationHost applicationHost)
+    public void ConfigureServices(IServiceCollection serviceCollection)
     {
         Console.WriteLine("OAuth: RegisterServices called");
         _logger.LogInformation("OAuth Plugin: RegisterServices called");
