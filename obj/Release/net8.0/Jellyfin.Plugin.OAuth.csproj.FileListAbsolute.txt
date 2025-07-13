@@ -1,0 +1,12 @@
+/home/willynikes/jellyfin-oauth-plugin/Jellyfin.Plugin.OAuth/bin/Release/net8.0/Jellyfin.Plugin.OAuth.deps.json
+/home/willynikes/jellyfin-oauth-plugin/Jellyfin.Plugin.OAuth/bin/Release/net8.0/Jellyfin.Plugin.OAuth.dll
+/home/willynikes/jellyfin-oauth-plugin/Jellyfin.Plugin.OAuth/bin/Release/net8.0/Jellyfin.Plugin.OAuth.pdb
+/home/willynikes/jellyfin-oauth-plugin/Jellyfin.Plugin.OAuth/obj/Release/net8.0/Jellyfin.Plugin.OAuth.csproj.AssemblyReference.cache
+/home/willynikes/jellyfin-oauth-plugin/Jellyfin.Plugin.OAuth/obj/Release/net8.0/Jellyfin.Plugin.OAuth.GeneratedMSBuildEditorConfig.editorconfig
+/home/willynikes/jellyfin-oauth-plugin/Jellyfin.Plugin.OAuth/obj/Release/net8.0/Jellyfin.Plugin.OAuth.AssemblyInfoInputs.cache
+/home/willynikes/jellyfin-oauth-plugin/Jellyfin.Plugin.OAuth/obj/Release/net8.0/Jellyfin.Plugin.OAuth.AssemblyInfo.cs
+/home/willynikes/jellyfin-oauth-plugin/Jellyfin.Plugin.OAuth/obj/Release/net8.0/Jellyfin.Plugin.OAuth.csproj.CoreCompileInputs.cache
+/home/willynikes/jellyfin-oauth-plugin/Jellyfin.Plugin.OAuth/obj/Release/net8.0/Jellyfin.Plugin.OAuth.dll
+/home/willynikes/jellyfin-oauth-plugin/Jellyfin.Plugin.OAuth/obj/Release/net8.0/refint/Jellyfin.Plugin.OAuth.dll
+/home/willynikes/jellyfin-oauth-plugin/Jellyfin.Plugin.OAuth/obj/Release/net8.0/Jellyfin.Plugin.OAuth.pdb
+/home/willynikes/jellyfin-oauth-plugin/Jellyfin.Plugin.OAuth/obj/Release/net8.0/ref/Jellyfin.Plugin.OAuth.dll

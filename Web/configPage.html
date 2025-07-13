@@ -1,0 +1,513 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>OAuth Authentication</title>
+</head>
+<body>
+    <div data-role="page" class="page type-interior pluginConfigurationPage oauthConfigurationPage">
+        <div data-role="content">
+            <div class="content-primary">
+                <form class="oauthConfigurationForm">
+                    <div class="verticalSection verticalSection-extrabottompadding">
+                        <div class="sectionTitleContainer flex align-items-center">
+                            <h2 class="sectionTitle">OAuth Authentication Settings</h2>
+                        </div>
+                        <p>Configure Google and Apple OAuth 2.0 authentication with Wizarr integration.</p>
+                        <p><i>Note:</i> Making changes to this configuration requires a restart of Jellyfin.</p>
+                        
+                        <div class="verticalSection" is="emby-collapse" title="General Settings">
+                            <div class="collapseContent">
+                                <div class="checkboxContainer checkboxContainer-withDescription">
+                                    <label>
+                                        <input type="checkbox" is="emby-checkbox" id="chkAutoCreateUsers" />
+                                        <span>Automatically create new users on first login</span>
+                                    </label>
+                                    <div class="fieldDescription checkboxFieldDescription">Enable automatic user creation when users authenticate via OAuth for the first time.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="verticalSection" is="emby-collapse" title="Google OAuth Settings">
+                            <div class="collapseContent">
+                                <div class="checkboxContainer checkboxContainer-withDescription">
+                                    <label>
+                                        <input type="checkbox" is="emby-checkbox" id="chkEnableGoogleOAuth" />
+                                        <span>Enable Google OAuth</span>
+                                    </label>
+                                    <div class="fieldDescription checkboxFieldDescription">Allow users to sign in with their Google account.</div>
+                                </div>
+                                <div class="inputContainer">
+                                    <input is="emby-input" type="text" id="txtGoogleClientId" label="Google Client ID:" />
+                                    <div class="fieldDescription">The OAuth 2.0 client ID from your Google Cloud Console.</div>
+                                </div>
+                                <div class="inputContainer">
+                                    <input is="emby-input" type="password" id="txtGoogleClientSecret" label="Google Client Secret:" />
+                                    <div class="fieldDescription">The OAuth 2.0 client secret from your Google Cloud Console.</div>
+                                </div>
+                                <div class="inputContainer">
+                                    <input is="emby-input" type="text" id="txtGoogleScopes" label="Google Scopes:" />
+                                    <div class="fieldDescription">Space-separated list of OAuth scopes to request (e.g., "email profile").</div>
+                                </div>
+                                <div class="inputContainer">
+                                    <input is="emby-input" type="text" id="txtGoogleRedirectUri" label="Google OAuth Redirect URI:" />
+                                    <div class="fieldDescription">The redirect URI configured in your Google Cloud Console. Example: http://jellyfin.example.com:8096/oauth/google/callback</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="verticalSection" is="emby-collapse" title="Apple OAuth Settings">
+                            <div class="collapseContent">
+                                <div class="checkboxContainer checkboxContainer-withDescription">
+                                    <label>
+                                        <input type="checkbox" is="emby-checkbox" id="chkEnableAppleOAuth" />
+                                        <span>Enable Apple OAuth</span>
+                                    </label>
+                                    <div class="fieldDescription checkboxFieldDescription">Allow users to sign in with their Apple ID.</div>
+                                </div>
+                                <div class="inputContainer">
+                                    <input is="emby-input" type="text" id="txtAppleServicesId" label="Apple Services ID:" />
+                                    <div class="fieldDescription">The Services ID from your Apple Developer account.</div>
+                                </div>
+                                <div class="inputContainer">
+                                    <input is="emby-input" type="text" id="txtAppleTeamId" label="Apple Team ID:" />
+                                    <div class="fieldDescription">Your Apple Developer Team ID.</div>
+                                </div>
+                                <div class="inputContainer">
+                                    <input is="emby-input" type="text" id="txtAppleKeyId" label="Apple Key ID:" />
+                                    <div class="fieldDescription">The Key ID for your Apple Sign In key.</div>
+                                </div>
+                                <div class="inputContainer">
+                                    <textarea is="emby-textarea" id="txtApplePrivateKey" label="Apple Private Key:" rows="6"></textarea>
+                                    <div class="fieldDescription">The private key content for Apple Sign In authentication.</div>
+                                </div>
+                                <div class="inputContainer">
+                                    <input is="emby-input" type="text" id="txtAppleRedirectUri" label="Apple OAuth Redirect URI:" />
+                                    <div class="fieldDescription">The redirect URI configured in your Apple Developer account. Example: https://jellyfin.example.com:8096/oauth/apple/callback (Note: Apple requires HTTPS)</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="verticalSection" is="emby-collapse" title="Wizarr Integration Settings">
+                            <div class="collapseContent">
+                                <div class="checkboxContainer checkboxContainer-withDescription">
+                                    <label>
+                                        <input type="checkbox" is="emby-checkbox" id="chkEnableWizarrIntegration" />
+                                        <span>Enable Wizarr Integration</span>
+                                    </label>
+                                    <div class="fieldDescription checkboxFieldDescription">Enable integration with Wizarr for invite-based user registration.</div>
+                                </div>
+                                <div class="inputContainer">
+                                    <input is="emby-input" type="text" id="txtWizarrApiUrl" label="Wizarr API URL:" />
+                                    <div class="fieldDescription">The base URL for your Wizarr instance (e.g., http://localhost:5690).</div>
+                                </div>
+                                <div class="inputContainer">
+                                    <input is="emby-input" type="password" id="txtWizarrApiKey" label="Wizarr API Key:" />
+                                    <div class="fieldDescription">The API key for authenticating with your Wizarr instance.</div>
+                                </div>
+                                <div class="checkboxContainer checkboxContainer-withDescription">
+                                    <label>
+                                        <input type="checkbox" is="emby-checkbox" id="chkRequireValidInvite" />
+                                        <span>Require valid invite code for OAuth registration</span>
+                                    </label>
+                                    <div class="fieldDescription checkboxFieldDescription">When enabled, users must use a valid Wizarr invite link to register via OAuth.</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="verticalSection" is="emby-collapse" title="OAuth Flow Testing">
+                            <div class="collapseContent">
+                                <div class="fieldDescription">
+                                    <p>Use these URLs to test your OAuth configuration:</p>
+                                    <ul>
+                                        <li>Google: <strong id="googleTestUrl">Configure redirect URI to see test URL</strong></li>
+                                        <li>Apple: <strong id="appleTestUrl">Configure redirect URI to see test URL</strong></li>
+                                    </ul>
+                                    <p>For Wizarr integration, add <code>?invite=YOUR_INVITE_CODE</code> to the URLs above.</p>
+                                    <p><em>Note: Test URLs are automatically generated from your redirect URI settings by replacing '/callback' with '/authorize'.</em></p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="messageContainer" style="display: none; margin-bottom: 20px;">
+                            <div id="messageContent" class="alert"></div>
+                        </div>
+                        
+                        <style>
+                            .alert {
+                                padding: 15px;
+                                margin-bottom: 20px;
+                                border: 1px solid transparent;
+                                border-radius: 4px;
+                            }
+                            
+                            .alert-info {
+                                color: #31708f;
+                                background-color: #d9edf7;
+                                border-color: #bce8f1;
+                            }
+                            
+                            .alert-error {
+                                color: #a94442;
+                                background-color: #f2dede;
+                                border-color: #ebccd1;
+                            }
+                        </style>
+
+                        <div>
+                            <button is="emby-button" type="submit" data-theme="b" class="raised button-submit block">
+                                <span>Save Configuration</span>
+                            </button>
+                            <button is="emby-button" type="button" class="raised button-cancel block btnCancel" onclick="history.back();">
+                                <span>Cancel</span>
+                            </button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <script type="text/javascript">
+            console.log('OAuth Configuration Page: Script starting to load');
+
+            var OAuthConfigurationPage = {
+                pluginUniqueId: "e4a2f2b6-8c3a-4b9d-9e1f-2a3b4c5d6e7f",
+                
+                // Initialize all element references to null - will be set in pageshow
+                chkAutoCreateUsers: null,
+                chkEnableGoogleOAuth: null,
+                txtGoogleClientId: null,
+                txtGoogleClientSecret: null,
+                txtGoogleScopes: null,
+                txtGoogleRedirectUri: null,
+                chkEnableAppleOAuth: null,
+                txtAppleServicesId: null,
+                txtAppleTeamId: null,
+                txtAppleKeyId: null,
+                txtApplePrivateKey: null,
+                txtAppleRedirectUri: null,
+                chkEnableWizarrIntegration: null,
+                txtWizarrApiUrl: null,
+                txtWizarrApiKey: null,
+                chkRequireValidInvite: null,
+                googleTestUrl: null,
+                appleTestUrl: null,
+                messageContainer: null,
+                messageContent: null,
+
+                showMessage: function(message, isError) {
+                    console.log('OAuth Configuration Page: Showing message:', message, 'Error:', isError);
+                    if (this.messageContent && this.messageContainer) {
+                        this.messageContent.textContent = message;
+                        this.messageContent.className = isError ? 'alert alert-error' : 'alert alert-info';
+                        this.messageContainer.style.display = 'block';
+                        
+                        setTimeout(() => {
+                            if (this.messageContainer) {
+                                this.messageContainer.style.display = 'none';
+                            }
+                        }, 5000);
+                    }
+                },
+
+                updateTestUrls: function() {
+                    console.log('OAuth Configuration Page: Updating test URLs');
+                    
+                    if (this.googleTestUrl && this.txtGoogleRedirectUri) {
+                        var googleRedirectUri = this.txtGoogleRedirectUri.value;
+                        if (googleRedirectUri && googleRedirectUri.includes('/oauth/google/callback')) {
+                            var googleTestUrl = googleRedirectUri.replace('/oauth/google/callback', '/oauth/google/authorize');
+                            this.googleTestUrl.textContent = googleTestUrl;
+                        } else {
+                            this.googleTestUrl.textContent = 'Configure redirect URI to see test URL';
+                        }
+                    }
+                    
+                    if (this.appleTestUrl && this.txtAppleRedirectUri) {
+                        var appleRedirectUri = this.txtAppleRedirectUri.value;
+                        if (appleRedirectUri && appleRedirectUri.includes('/oauth/apple/callback')) {
+                            var appleTestUrl = appleRedirectUri.replace('/oauth/apple/callback', '/oauth/apple/authorize');
+                            this.appleTestUrl.textContent = appleTestUrl;
+                        } else {
+                            this.appleTestUrl.textContent = 'Configure redirect URI to see test URL';
+                        }
+                    }
+                },
+
+                toggleGoogleSettings: function() {
+                    console.log('OAuth Configuration Page: Toggling Google settings');
+                    if (this.chkEnableGoogleOAuth) {
+                        var enabled = this.chkEnableGoogleOAuth.checked;
+                        if (this.txtGoogleClientId) this.txtGoogleClientId.disabled = !enabled;
+                        if (this.txtGoogleClientSecret) this.txtGoogleClientSecret.disabled = !enabled;
+                        if (this.txtGoogleScopes) this.txtGoogleScopes.disabled = !enabled;
+                        if (this.txtGoogleRedirectUri) this.txtGoogleRedirectUri.disabled = !enabled;
+                    }
+                },
+
+                toggleAppleSettings: function() {
+                    console.log('OAuth Configuration Page: Toggling Apple settings');
+                    if (this.chkEnableAppleOAuth) {
+                        var enabled = this.chkEnableAppleOAuth.checked;
+                        if (this.txtAppleServicesId) this.txtAppleServicesId.disabled = !enabled;
+                        if (this.txtAppleTeamId) this.txtAppleTeamId.disabled = !enabled;
+                        if (this.txtAppleKeyId) this.txtAppleKeyId.disabled = !enabled;
+                        if (this.txtApplePrivateKey) this.txtApplePrivateKey.disabled = !enabled;
+                        if (this.txtAppleRedirectUri) this.txtAppleRedirectUri.disabled = !enabled;
+                    }
+                },
+
+                toggleWizarrSettings: function() {
+                    console.log('OAuth Configuration Page: Toggling Wizarr settings');
+                    if (this.chkEnableWizarrIntegration) {
+                        var enabled = this.chkEnableWizarrIntegration.checked;
+                        if (this.txtWizarrApiUrl) this.txtWizarrApiUrl.disabled = !enabled;
+                        if (this.txtWizarrApiKey) this.txtWizarrApiKey.disabled = !enabled;
+                        if (this.chkRequireValidInvite) this.chkRequireValidInvite.disabled = !enabled;
+                    }
+                },
+
+                loadConfiguration: function() {
+                    console.log('OAuth Configuration Page: Loading configuration...');
+                    Dashboard.showLoadingMsg();
+
+                    return window.ApiClient.getPluginConfiguration(this.pluginUniqueId).then((config) => {
+                        console.log('OAuth Configuration Page: Loaded configuration:', config);
+                        
+                        // General Settings
+                        if (this.chkAutoCreateUsers) {
+                            this.chkAutoCreateUsers.checked = config.AutoCreateUsers || false;
+                        }
+                        
+                        // Google OAuth Settings
+                        if (this.chkEnableGoogleOAuth) {
+                            this.chkEnableGoogleOAuth.checked = config.EnableGoogleOAuth || false;
+                        }
+                        if (this.txtGoogleClientId) {
+                            this.txtGoogleClientId.value = (config.GoogleSettings && config.GoogleSettings.ClientId) || '';
+                        }
+                        if (this.txtGoogleClientSecret) {
+                            this.txtGoogleClientSecret.value = (config.GoogleSettings && config.GoogleSettings.ClientSecret) || '';
+                        }
+                        if (this.txtGoogleScopes) {
+                            this.txtGoogleScopes.value = (config.GoogleSettings && config.GoogleSettings.Scopes) || 'email profile';
+                        }
+                        if (this.txtGoogleRedirectUri) {
+                            this.txtGoogleRedirectUri.value = (config.GoogleSettings && config.GoogleSettings.RedirectUri) || 'http://localhost:8096/oauth/google/callback';
+                        }
+                        
+                        // Apple OAuth Settings
+                        if (this.chkEnableAppleOAuth) {
+                            this.chkEnableAppleOAuth.checked = config.EnableAppleOAuth || false;
+                        }
+                        if (this.txtAppleServicesId) {
+                            this.txtAppleServicesId.value = (config.AppleSettings && config.AppleSettings.ServicesId) || '';
+                        }
+                        if (this.txtAppleTeamId) {
+                            this.txtAppleTeamId.value = (config.AppleSettings && config.AppleSettings.TeamId) || '';
+                        }
+                        if (this.txtAppleKeyId) {
+                            this.txtAppleKeyId.value = (config.AppleSettings && config.AppleSettings.KeyId) || '';
+                        }
+                        if (this.txtApplePrivateKey) {
+                            this.txtApplePrivateKey.value = (config.AppleSettings && config.AppleSettings.PrivateKey) || '';
+                        }
+                        if (this.txtAppleRedirectUri) {
+                            this.txtAppleRedirectUri.value = (config.AppleSettings && config.AppleSettings.RedirectUri) || 'https://localhost:8096/oauth/apple/callback';
+                        }
+                        
+                        // Wizarr Integration Settings
+                        if (this.chkEnableWizarrIntegration) {
+                            this.chkEnableWizarrIntegration.checked = config.EnableWizarrIntegration || false;
+                        }
+                        if (this.txtWizarrApiUrl) {
+                            this.txtWizarrApiUrl.value = config.WizarrApiUrl || 'http://localhost:5690';
+                        }
+                        if (this.txtWizarrApiKey) {
+                            this.txtWizarrApiKey.value = config.WizarrApiKey || '';
+                        }
+                        if (this.chkRequireValidInvite) {
+                            this.chkRequireValidInvite.checked = config.RequireValidInvite || false;
+                        }
+                        
+                        // Update UI states
+                        this.toggleGoogleSettings();
+                        this.toggleAppleSettings();
+                        this.toggleWizarrSettings();
+                        this.updateTestUrls();
+                        
+                        Dashboard.hideLoadingMsg();
+                        console.log('OAuth Configuration Page: Configuration loaded successfully');
+                    }).catch((error) => {
+                        console.error('OAuth Configuration Page: Error loading configuration:', error);
+                        Dashboard.hideLoadingMsg();
+                        this.showMessage('Error loading configuration: ' + (error.message || error), true);
+                    });
+                },
+
+                saveConfiguration: function() {
+                    console.log('OAuth Configuration Page: Starting save process');
+                    Dashboard.showLoadingMsg();
+
+                    return window.ApiClient.getPluginConfiguration(this.pluginUniqueId).then((config) => {
+                        console.log('OAuth Configuration Page: Current config before update:', config);
+                        
+                        // General Settings
+                        if (this.chkAutoCreateUsers) {
+                            config.AutoCreateUsers = this.chkAutoCreateUsers.checked;
+                        }
+                        
+                        // Google OAuth Settings
+                        if (this.chkEnableGoogleOAuth) {
+                            config.EnableGoogleOAuth = this.chkEnableGoogleOAuth.checked;
+                        }
+                        config.GoogleSettings = config.GoogleSettings || {};
+                        if (this.txtGoogleClientId) {
+                            config.GoogleSettings.ClientId = this.txtGoogleClientId.value;
+                        }
+                        if (this.txtGoogleClientSecret) {
+                            config.GoogleSettings.ClientSecret = this.txtGoogleClientSecret.value;
+                        }
+                        if (this.txtGoogleScopes) {
+                            config.GoogleSettings.Scopes = this.txtGoogleScopes.value;
+                        }
+                        if (this.txtGoogleRedirectUri) {
+                            config.GoogleSettings.RedirectUri = this.txtGoogleRedirectUri.value;
+                        }
+                        
+                        // Apple OAuth Settings
+                        if (this.chkEnableAppleOAuth) {
+                            config.EnableAppleOAuth = this.chkEnableAppleOAuth.checked;
+                        }
+                        config.AppleSettings = config.AppleSettings || {};
+                        if (this.txtAppleServicesId) {
+                            config.AppleSettings.ServicesId = this.txtAppleServicesId.value;
+                        }
+                        if (this.txtAppleTeamId) {
+                            config.AppleSettings.TeamId = this.txtAppleTeamId.value;
+                        }
+                        if (this.txtAppleKeyId) {
+                            config.AppleSettings.KeyId = this.txtAppleKeyId.value;
+                        }
+                        if (this.txtApplePrivateKey) {
+                            config.AppleSettings.PrivateKey = this.txtApplePrivateKey.value;
+                        }
+                        if (this.txtAppleRedirectUri) {
+                            config.AppleSettings.RedirectUri = this.txtAppleRedirectUri.value;
+                        }
+                        
+                        // Wizarr Integration Settings
+                        if (this.chkEnableWizarrIntegration) {
+                            config.EnableWizarrIntegration = this.chkEnableWizarrIntegration.checked;
+                        }
+                        if (this.txtWizarrApiUrl) {
+                            config.WizarrApiUrl = this.txtWizarrApiUrl.value;
+                        }
+                        if (this.txtWizarrApiKey) {
+                            config.WizarrApiKey = this.txtWizarrApiKey.value;
+                        }
+                        if (this.chkRequireValidInvite) {
+                            config.RequireValidInvite = this.chkRequireValidInvite.checked;
+                        }
+                        
+                        console.log('OAuth Configuration Page: Config after update:', config);
+                        console.log('OAuth Configuration Page: Calling updatePluginConfiguration...');
+                        
+                        return window.ApiClient.updatePluginConfiguration(this.pluginUniqueId, config).then(() => {
+                            console.log('OAuth Configuration Page: Configuration saved successfully');
+                            Dashboard.hideLoadingMsg();
+                            this.showMessage('Configuration saved successfully! Please restart Jellyfin for changes to take effect.', false);
+                        }).catch((error) => {
+                            console.error('OAuth Configuration Page: Error saving configuration:', error);
+                            Dashboard.hideLoadingMsg();
+                            this.showMessage('Error saving configuration: ' + (error.message || error), true);
+                        });
+                    }).catch((error) => {
+                        console.error('OAuth Configuration Page: Error getting current configuration:', error);
+                        Dashboard.hideLoadingMsg();
+                        this.showMessage('Error getting current configuration: ' + (error.message || error), true);
+                    });
+                }
+            };
+
+            // Wait for page to be ready
+            document.querySelector('.oauthConfigurationPage').addEventListener("pageshow", function () {
+                console.log('OAuth Configuration Page: Page show event fired');
+                
+                // Initialize all DOM element references
+                OAuthConfigurationPage.chkAutoCreateUsers = document.querySelector("#chkAutoCreateUsers");
+                OAuthConfigurationPage.chkEnableGoogleOAuth = document.querySelector("#chkEnableGoogleOAuth");
+                OAuthConfigurationPage.txtGoogleClientId = document.querySelector("#txtGoogleClientId");
+                OAuthConfigurationPage.txtGoogleClientSecret = document.querySelector("#txtGoogleClientSecret");
+                OAuthConfigurationPage.txtGoogleScopes = document.querySelector("#txtGoogleScopes");
+                OAuthConfigurationPage.txtGoogleRedirectUri = document.querySelector("#txtGoogleRedirectUri");
+                OAuthConfigurationPage.chkEnableAppleOAuth = document.querySelector("#chkEnableAppleOAuth");
+                OAuthConfigurationPage.txtAppleServicesId = document.querySelector("#txtAppleServicesId");
+                OAuthConfigurationPage.txtAppleTeamId = document.querySelector("#txtAppleTeamId");
+                OAuthConfigurationPage.txtAppleKeyId = document.querySelector("#txtAppleKeyId");
+                OAuthConfigurationPage.txtApplePrivateKey = document.querySelector("#txtApplePrivateKey");
+                OAuthConfigurationPage.txtAppleRedirectUri = document.querySelector("#txtAppleRedirectUri");
+                OAuthConfigurationPage.chkEnableWizarrIntegration = document.querySelector("#chkEnableWizarrIntegration");
+                OAuthConfigurationPage.txtWizarrApiUrl = document.querySelector("#txtWizarrApiUrl");
+                OAuthConfigurationPage.txtWizarrApiKey = document.querySelector("#txtWizarrApiKey");
+                OAuthConfigurationPage.chkRequireValidInvite = document.querySelector("#chkRequireValidInvite");
+                OAuthConfigurationPage.googleTestUrl = document.querySelector("#googleTestUrl");
+                OAuthConfigurationPage.appleTestUrl = document.querySelector("#appleTestUrl");
+                OAuthConfigurationPage.messageContainer = document.querySelector("#messageContainer");
+                OAuthConfigurationPage.messageContent = document.querySelector("#messageContent");
+
+                console.log('OAuth Configuration Page: DOM elements initialized');
+
+                // Set up event handlers
+                if (OAuthConfigurationPage.chkEnableGoogleOAuth) {
+                    OAuthConfigurationPage.chkEnableGoogleOAuth.addEventListener('change', function() {
+                        OAuthConfigurationPage.toggleGoogleSettings();
+                    });
+                }
+                if (OAuthConfigurationPage.chkEnableAppleOAuth) {
+                    OAuthConfigurationPage.chkEnableAppleOAuth.addEventListener('change', function() {
+                        OAuthConfigurationPage.toggleAppleSettings();
+                    });
+                }
+                if (OAuthConfigurationPage.chkEnableWizarrIntegration) {
+                    OAuthConfigurationPage.chkEnableWizarrIntegration.addEventListener('change', function() {
+                        OAuthConfigurationPage.toggleWizarrSettings();
+                    });
+                }
+                if (OAuthConfigurationPage.txtGoogleRedirectUri) {
+                    OAuthConfigurationPage.txtGoogleRedirectUri.addEventListener('input', function() {
+                        OAuthConfigurationPage.updateTestUrls();
+                    });
+                }
+                if (OAuthConfigurationPage.txtAppleRedirectUri) {
+                    OAuthConfigurationPage.txtAppleRedirectUri.addEventListener('input', function() {
+                        OAuthConfigurationPage.updateTestUrls();
+                    });
+                }
+
+                console.log('OAuth Configuration Page: Event handlers set up');
+
+                // Load configuration
+                OAuthConfigurationPage.loadConfiguration();
+            });
+
+            // Set up form submission handler
+            document.addEventListener('DOMContentLoaded', function() {
+                var form = document.querySelector(".oauthConfigurationForm");
+                if (form) {
+                    form.addEventListener("submit", function(e) {
+                        console.log('OAuth Configuration Page: Form submit event fired');
+                        e.preventDefault();
+                        OAuthConfigurationPage.saveConfiguration();
+                        return false;
+                    });
+                    console.log('OAuth Configuration Page: Form submit handler attached');
+                }
+            });
+
+            console.log('OAuth Configuration Page: Script initialization complete');
+        </script>
+    </div>
+</body>
+</html>
+

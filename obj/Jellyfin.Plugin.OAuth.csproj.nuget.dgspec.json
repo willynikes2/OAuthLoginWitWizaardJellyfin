@@ -1,0 +1,89 @@
+{
+  "format": 1,
+  "restore": {
+    "/home/willynikes/jellyfin-oauth-plugin/Jellyfin.Plugin.OAuth/Jellyfin.Plugin.OAuth.csproj": {}
+  },
+  "projects": {
+    "/home/willynikes/jellyfin-oauth-plugin/Jellyfin.Plugin.OAuth/Jellyfin.Plugin.OAuth.csproj": {
+      "version": "1.0.0",
+      "restore": {
+        "projectUniqueName": "/home/willynikes/jellyfin-oauth-plugin/Jellyfin.Plugin.OAuth/Jellyfin.Plugin.OAuth.csproj",
+        "projectName": "Jellyfin.Plugin.OAuth",
+        "projectPath": "/home/willynikes/jellyfin-oauth-plugin/Jellyfin.Plugin.OAuth/Jellyfin.Plugin.OAuth.csproj",
+        "packagesPath": "/home/willynikes/.nuget/packages/",
+        "outputPath": "/home/willynikes/jellyfin-oauth-plugin/Jellyfin.Plugin.OAuth/obj/",
+        "projectStyle": "PackageReference",
+        "configFilePaths": [
+          "/home/willynikes/.nuget/NuGet/NuGet.Config"
+        ],
+        "originalTargetFrameworks": [
+          "net8.0"
+        ],
+        "sources": {
+          "https://api.nuget.org/v3/index.json": {}
+        },
+        "frameworks": {
+          "net8.0": {
+            "targetAlias": "net8.0",
+            "projectReferences": {}
+          }
+        },
+        "warningProperties": {
+          "allWarningsAsErrors": true
+        }
+      },
+      "frameworks": {
+        "net8.0": {
+          "targetAlias": "net8.0",
+          "dependencies": {
+            "Jellyfin.Controller": {
+              "target": "Package",
+              "version": "[10.*, )"
+            },
+            "Jellyfin.Data": {
+              "target": "Package",
+              "version": "[10.*, )"
+            },
+            "Jellyfin.Model": {
+              "target": "Package",
+              "version": "[10.*, )"
+            },
+            "Microsoft.AspNetCore.Authentication.JwtBearer": {
+              "target": "Package",
+              "version": "[8.*, )"
+            },
+            "Microsoft.Extensions.Caching.Memory": {
+              "target": "Package",
+              "version": "[8.*, )"
+            },
+            "Microsoft.Extensions.Http": {
+              "target": "Package",
+              "version": "[8.*, )"
+            },
+            "System.IdentityModel.Tokens.Jwt": {
+              "target": "Package",
+              "version": "[7.*, )"
+            }
+          },
+          "imports": [
+            "net461",
+            "net462",
+            "net47",
+            "net471",
+            "net472",
+            "net48",
+            "net481"
+          ],
+          "assetTargetFallback": true,
+          "warn": true,
+          "frameworkReferences": {
+            "Microsoft.NETCore.App": {
+              "privateAssets": "all"
+            }
+          },
+          "runtimeIdentifierGraphPath": "/usr/lib/dotnet/sdk/8.0.117/PortableRuntimeIdentifierGraph.json"
+        }
+      }
+    }
+  }
+}
